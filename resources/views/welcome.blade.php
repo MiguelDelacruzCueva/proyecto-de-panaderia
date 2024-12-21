@@ -2,9 +2,33 @@
 @extends('layouts.footer')
 
 @section('header')
-
+</head>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-bread-slice me-2"></i>
+                PANADERIA CAPI-TAN
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#inicio">Inicio</a>
+                    </li>
+                </ul>
+                <div class="ms-lg-3">
+                    <a href="{{route('login')}}" method ="get" class="btn btn-outline-light me-2">Iniciar Sesión</a>
+                    <a href="{{ route('register') }}" method="get" class="btn btn-primary">Registrarse</a>
+                    <a href="{{ route('administer') }}" method="get" class="btn btn-secundary">admins</a>
+                
+                </div>
+            </div>
+        </div>
+    </nav>
 <body>
-    
 
     <!-- Hero Section -->
     <section id="inicio" class="hero">

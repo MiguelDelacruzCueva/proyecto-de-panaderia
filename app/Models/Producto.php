@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -8,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Producto extends Model
 {
     use HasFactory;
+
+    protected $table = 'productos';
 
     protected $fillable = [
         'nombre',
@@ -18,5 +19,8 @@ class Producto extends Model
         'disponibilidad',
     ];
 
-    protected $table = 'productos';
+    public function carritos()
+    {
+        return $this->hasMany(Carrito::class, 'producto_id');
+    }
 }

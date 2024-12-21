@@ -11,17 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('productos', function (Blueprint $table) {
+        Schema::create('carritos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->enum('categoria',['pan','postre','galleta']);
-            $table->decimal('precio',8,2);
-            $table->text('descripcion');
-            $table->string('imagen');
-            $table->boolean('disponibilidad')->default(true);
+            $table->foreignId('usuario_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('producto_id')->constrained('productos')->onDelete('cascade');
+            $table->integer('cantidad');
+            $table->decimal('precio_total', 10, 2);
             $table->timestamps();
         });
-        
     }
 
     /**
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('productos');
+        Schema::dropIfExists('carritos');
     }
 };

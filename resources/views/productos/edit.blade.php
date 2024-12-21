@@ -16,11 +16,12 @@
             <select class="form-control" id="categoria" name="categoria" required>
                 <option value="pan" {{ $producto->categoria == 'pan' ? 'selected' : '' }}>Pan</option>
                 <option value="postre" {{ $producto->categoria == 'postre' ? 'selected' : '' }}>Postre</option>
+                <option value="galleta" {{ $producto->categoria == 'galleta' ? 'selected' : '' }}>Galleta</option>
             </select>
         </div>
         <div class="mb-3">
             <label for="precio" class="form-label">Precio</label>
-            <input type="number" class="form-control" id="precio" name="precio" step="0.01" value="{{ $producto->precio }}" required>
+            <input type="number" step="0.01" class="form-control" id="precio" name="precio" value="{{ $producto->precio }}" required>
         </div>
         <div class="mb-3">
             <label for="descripcion" class="form-label">Descripción</label>

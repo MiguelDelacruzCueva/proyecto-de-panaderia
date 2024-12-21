@@ -1,43 +1,37 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro - Panadería</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
 </head>
-<body class="bg-gray-100">
-    <div class="min-h-screen flex items-center justify-center">
-        <div class="bg-white p-8 rounded-lg shadow-md w-96">
-            <h2 class="text-2xl font-bold mb-6 text-center">Registro</h2>
+<body>
+    <div class="container mx-auto mt-10">
+        <div class="w-full max-w-md mx-auto bg-white p-8 border border-gray-300">
+            <h1 class="text-2xl font-bold mb-6 text-center">Registrarse</h1>
             <form method="POST" action="{{ route('register') }}">
                 @csrf
                 <div class="mb-4">
                     <label for="nombre" class="block text-gray-700 text-sm font-bold mb-2">Nombre</label>
-                    <input type="text" name="nombre" id="nombre" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required autofocus>
+                    <input type="text" name="nombre" id="nombre" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                 </div>
                 <div class="mb-4">
-                    <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Correo Electrónico</label>
+                    <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
                     <input type="email" name="email" id="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                 </div>
                 <div class="mb-4">
-                    <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Contraseña</label>
+                    <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
                     <input type="password" name="password" id="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" required>
                 </div>
                 <div class="mb-4">
-                    <label for="password_confirmation" class="block text-gray-700 text-sm font-bold mb-2">Confirmar Contraseña</label>
-                    <input type="password" name="password_confirmation" id="password_confirmation" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" required>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2">Tipo de Registro</label>
-                    <div class="mt-2">
-                        <label class="inline-flex items-center">
-                            <input type="radio" class="form-radio" name="tipo" value="usuario" checked>
-                            <span class="ml-2">Usuario</span>
+                    <label for="tipo" class="block text-gray-700 text-sm font-bold mb-2">Tipo</label>
+                    <div>
+                        <label>
+                            <input type="radio" name="tipo" value="1" checked> Usuario
                         </label>
-                        <label class="inline-flex items-center ml-6">
-                            <input type="radio" class="form-radio" name="tipo" value="tienda">
-                            <span class="ml-2">Tienda</span>
+                        <label>
+                            <input type="radio" name="tipo" value="2"> Tienda
                         </label>
                     </div>
                 </div>
@@ -68,7 +62,7 @@
 
         tipoRadios.forEach(radio => {
             radio.addEventListener('change', (event) => {
-                if (event.target.value === 'tienda') {
+                if (event.target.value === '2') {
                     tiendaFields.classList.remove('hidden');
                 } else {
                     tiendaFields.classList.add('hidden');
@@ -78,4 +72,3 @@
     </script>
 </body>
 </html>
-

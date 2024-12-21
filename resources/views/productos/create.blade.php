@@ -15,6 +15,7 @@
             <select class="form-control" id="categoria" name="categoria" required>
                 <option value="pan">Pan</option>
                 <option value="postre">Postre</option>
+                <option value="galleta">Galleta</option>
             </select>
         </div>
         <div class="mb-3">
@@ -25,10 +26,20 @@
             <label for="descripcion" class="form-label">Descripción</label>
             <textarea class="form-control" id="descripcion" name="descripcion" required></textarea>
         </div>
+
+
         <div class="mb-3">
             <label for="imagen" class="form-label">Imagen</label>
-            <input type="text" class="form-control" id="imagen" name="imagen" required>
+            <div  action="{{ route('files.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" required>
+                @error('imagen')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+              
+          </div>
         </div>
+
         <div class="mb-3">
             <label for="disponibilidad" class="form-label">Disponibilidad</label>
             <select class="form-control" id="disponibilidad" name="disponibilidad" required>
@@ -37,6 +48,8 @@
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Crear</button>
+        <a href ="{{route('productos.index')}}" class= "btn btn-secundary">volver</a>
+    
     </form>
 </div>
 @section('footer')

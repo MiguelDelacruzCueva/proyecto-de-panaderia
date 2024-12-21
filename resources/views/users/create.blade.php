@@ -4,7 +4,7 @@
 @section('header')
 <div class="container">
     <h1>Crear Usuario</h1>
-    <form action="{{ route('cliente.store') }}" method="POST">
+    <form action="{{ route('users.store') }}" method="POST">
         @csrf
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre</label>
@@ -22,18 +22,13 @@
             <label for="password_confirmation" class="form-label">Confirmar Contraseña</label>
             <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
         </div>
-        <div class="mb-3">
-            <label for="es_admin" class="form-label">Es Admin</label>
-            <select class="form-control" id="es_admin" name="es_admin" required>
-                <option value="1">Sí</option>
-                <option value="0">No</option>
-            </select>
-        </div>
+        
         <div class="mb-3">
             <label for="tipo" class="form-label">Tipo</label>
             <select class="form-control" id="tipo" name="tipo" required>
-                <option value="usuario">Usuario</option>
-                <option value="tienda">Tienda</option>
+                @foreach($cargos as $cargo)
+                    <option value="{{ $cargo->id }}">{{ $cargo->nombre }}</option>
+                @endforeach
             </select>
         </div>
         <div class="mb-3">

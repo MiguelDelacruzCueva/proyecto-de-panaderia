@@ -2,9 +2,11 @@
 @extends('layouts.footer')
 
 @section('header')
+
+
 <div class="container">
     <h1>Lista de Usuarios</h1>
-    <a href="{{ route('cliente.create') }}" class="btn btn-primary">Crear Usuario</a>
+    <a href="{{ route('users.create') }}" class="btn btn-primary">Crear Usuario</a>
     <table class="table mt-3">
         <thead>
             <tr>
@@ -21,9 +23,9 @@
                     <td>{{ $usuario->email }}</td>
                     <td>{{ $usuario->tipo }}</td>
                     <td>
-                        <a href="{{ route('usuarios.show', $usuario->id) }}" class="btn btn-info btn-sm">Ver</a>
-                        <a href="{{ route('usuarios.edit', $usuario->id) }}" class="btn btn-warning btn-sm">Editar</a>
-                        <form action="{{ route('usuarios.destroy', $usuario->id) }}" method="POST" style="display:inline;">
+                        <a href="{{ route('users.show', $usuario->id) }}" class="btn btn-info btn-sm">Ver</a>
+                        <a href="{{ route('users.edit', $usuario->id) }}" class="btn btn-warning btn-sm">Editar</a>
+                        <form action="{{ route('users.destroy', $usuario->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>

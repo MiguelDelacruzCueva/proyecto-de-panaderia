@@ -2,9 +2,14 @@
 @extends('layouts.footer')
 
 @section('header')
+
 <div class="container">
+<div></div>
+<div></div>
     <h1>Lista de Productos</h1>
     <a href="{{ route('productos.create') }}" class="btn btn-primary">Crear Producto</a>
+    <a href="{{ route('administer') }}" class="btn btn-secundary">Volver</a>
+
     <table class="table mt-3">
         <thead>
             <tr>
@@ -40,5 +45,5 @@
         </tbody>
     </table>
 </div>
-
+@section('footer')
 @endsection

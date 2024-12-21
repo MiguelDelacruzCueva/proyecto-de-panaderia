@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 
@@ -10,19 +11,19 @@ class ProductosController extends Controller
     public function index()
     {
         $productos = Producto::all();
-        return view('crud_productitos.index', compact('productos'));
+        return view('productos.index', compact('productos'));
     }
 
     public function create()
     {
-        return view('crud_productitos.create');
+        return view('productos.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'nombre' => 'required|string|max:255',
-            'categoria' => 'required|in:pan,postre',
+            'categoria' => 'required|in:pan,postre,galleta',
             'precio' => 'required|numeric',
             'descripcion' => 'required|string',
             'imagen' => 'required|string',
@@ -30,44 +31,39 @@ class ProductosController extends Controller
         ]);
 
         Producto::create($request->all());
-
-        return redirect()->route('productos.index');
+       
+        return redirect()->route('productos.index')->with('success', 'Producto creado exitosamente.');
     }
 
-    public function show($id)
+    public function show(Producto $producto)
     {
-        $producto = Producto::find($id);
-        return view('crud_productitos.show', compact('producto'));
+        return view('productos.show', compact('producto'));
     }
 
-    public function edit($id)
+    public function edit(Producto $producto)
     {
-        $producto = Producto::find($id);
-        return view('crud_productitos.edit', compact('producto'));
+        return view('productos.edit', compact('producto'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Producto $producto)
     {
         $request->validate([
             'nombre' => 'required|string|max:255',
-            'categoria' => 'required|in:pan,postre',
+            'categoria' => 'required|in:pan,postre,galleta',
             'precio' => 'required|numeric',
             'descripcion' => 'required|string',
             'imagen' => 'required|string',
             'disponibilidad' => 'required|boolean',
         ]);
 
-        $producto = Producto::find($id);
         $producto->update($request->all());
 
-        return redirect()->route('productos.index');
+        return redirect()->route('productos.index')->with('success', 'Producto actualizado exitosamente.');
     }
 
-    public function destroy($id)
+    public function destroy(Producto $producto)
     {
-        $producto = Producto::find($id);
         $producto->delete();
-
-        return redirect()->route('productos.index');
+        return redirect()->route('productos.index')->with('success', 'Producto eliminado exitosamente.');
     }
 }
