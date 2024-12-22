@@ -1,8 +1,6 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Carrito;
 use App\Models\Producto;
 use Illuminate\Http\Request;
@@ -12,8 +10,8 @@ class CarritoController extends Controller
 {
     public function index()
     {
-        $carritos = Carrito::where('usuario_id', Auth::id())->get();
-        return view('carrito.index', compact('carritos'));
+        $carritos = Carrito::where('user_id', Auth::id())->get();
+        return view('carritos.index', compact('carritos'));
     }
 
     public function store(Request $request)
@@ -27,13 +25,26 @@ class CarritoController extends Controller
         $precio_total = $producto->precio * $request->cantidad;
 
         Carrito::create([
-            'usuario_id' => Auth::id(),
+            'user_id' => Auth::id(),
             'producto_id' => $request->producto_id,
             'cantidad' => $request->cantidad,
             'precio_total' => $precio_total,
         ]);
 
         return redirect()->route('carritos.index')->with('success', 'Producto añadido al carrito.');
+    }
+
+    public function update(Request $request, Carrito $carrito)
+    {
+        $request->validate([
+            'cantidad' => 'required|integer|min:1',
+        ]);
+
+        $carrito->cantidad = $request->cantidad;
+        $carrito->precio_total = $carrito->producto->precio * $request->cantidad;
+        $carrito->save();
+
+        return redirect()->route('carritos.index')->with('success', 'Cantidad actualizada.');
     }
 
     public function destroy(Carrito $carrito)

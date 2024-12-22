@@ -5,6 +5,7 @@
 
 <div class="container">
     <h1>Carrito de Compras</h1>
+    <a href="{{ route('administer') }}" class="btn btn-secundary">Volver</a>
     @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}

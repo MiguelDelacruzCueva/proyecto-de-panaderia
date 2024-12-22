@@ -22,7 +22,7 @@
                 <div class="ms-lg-3">
                     <a href="{{route('login')}}" method ="get" class="btn btn-outline-light me-2">Iniciar Sesión</a>
                     <a href="{{ route('register') }}" method="get" class="btn btn-primary">Registrarse</a>
-                    <a href="{{ route('administer') }}" method="get" class="btn btn-secundary">admins</a>
+                
                 
                 </div>
             </div>

@@ -7,7 +7,8 @@ use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\CompraController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\LoginController;
-use GuzzleHttp\Middleware;
+use App\Http\Controllers\PrincipalController;
+
 
 Route::view('/', 'welcome')->name('welcome');//es lo hace iniciar la pagina
 Route::resource('users', UserController::class);
@@ -32,6 +33,9 @@ Route::get('files', [FileController::class, 'index'])->name('files.index');
 Route::get('files/download/{file}', [FileController::class, 'download'])->name('files.download');
 Route::delete('files/{file}', [FileController::class, 'destroy'])->name('files.destroy');
 
+
+Route::get('/principal', [PrincipalController::class, 'index'])->middleware('auth')->name('principal');
+
 Route::get('/administer', function () {
     return view('administer');
 })->middleware('auth')->name('administer');
@@ -41,13 +45,11 @@ Route::get('/dashboard', function () {
 })->middleware('auth');
 
 //---------------=======================
-Route::get('/welcome_user', function () {
-    return view('welcome_user');
-})->name('welcome_user')->middleware('auth');
+// Route::get('/principal', function () {
+//     return view('principal');
+// })->name('principal')->middleware('auth');
 
-Route::get('/welcome_admin', function () {
-    return view('welcome_admin');
-})->name('welcome_admin')->middleware('auth');
+
 
 
 

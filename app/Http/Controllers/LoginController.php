@@ -25,7 +25,7 @@ class LoginController extends Controller
             if ($user->tipo == 3) {
                 return redirect()->route('administer');
             } else {
-                return redirect()->route('welcome_user');
+                return redirect()->route('principal');
             }
         }
         return back()->withErrors([
@@ -35,8 +35,9 @@ class LoginController extends Controller
     //peromite darnos opciones al ingresar nuestros datos , las opciones en este caso de usuario y tienda
     public function showRegistrationForm()
     {
-        $cargos = Cargo::all();
-        return view('auth.register', compact('cargos'));
+        // $cargos = Cargo::all();
+        return view('auth.register');
+        // , compact('cargos')
     }
 
 
@@ -62,11 +63,9 @@ class LoginController extends Controller
             'nombre_tienda' => $request->nombre_tienda,
             'ruc' => $request->ruc,
         ]);
-        $usuario->save();
-
         Auth::login($usuario);
 
-        return redirect()->route('welcome_user');
+        return redirect()->route('principal');
     }
 //nos permite regresar al salir de la sesion
     public function logout(Request $request)
