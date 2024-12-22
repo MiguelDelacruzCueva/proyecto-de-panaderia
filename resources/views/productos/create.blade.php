@@ -30,14 +30,18 @@
 
         <div class="mb-3">
             <label for="imagen" class="form-label">Imagen</label>
-            <div  action="{{ route('files.store') }}" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+            <label for="imagen" class="form-label">Imagen</label>
+            <input type="file" class="form-control" id="imagen" name="imagen" required>
+        </div>
+            <!-- <div  action="{{ route('files.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" required>
                 @error('imagen')
                 <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
               
-          </div>
+          </div> -->
         </div>
 
         <div class="mb-3">

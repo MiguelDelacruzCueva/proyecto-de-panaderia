@@ -11,8 +11,6 @@ use App\Http\Controllers\PrincipalController;
 
 
 Route::view('/', 'welcome')->name('welcome');//es lo hace iniciar la pagina
-Route::resource('users', UserController::class);
-Route::resource('productos', ProductosController::class);
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
@@ -22,13 +20,11 @@ Route::post('/register', [LoginController::class, 'register']);
 
 Route::resource('productos', ProductosController::class);
 Route::resource('users', UserController::class);
-
 Route::resource('carritos', CarritoController::class)->only(['index', 'store', 'destroy']);
 Route::resource('compras', CompraController::class);
 
 Route::post('files', [FileController::class, 'store'])->name('files.store');
 Route::get('files/create', [FileController::class, 'create'])->name('files.create');
-Route::post('files', [FileController::class, 'store'])->name('files.store');
 Route::get('files', [FileController::class, 'index'])->name('files.index');
 Route::get('files/download/{file}', [FileController::class, 'download'])->name('files.download');
 Route::delete('files/{file}', [FileController::class, 'destroy'])->name('files.destroy');
@@ -45,9 +41,9 @@ Route::get('/dashboard', function () {
 })->middleware('auth');
 
 //---------------=======================
-// Route::get('/principal', function () {
+//  Route::get('/principal', function () {
 //     return view('principal');
-// })->name('principal')->middleware('auth');
+//  })->name('principal')->middleware('auth');
 
 
 

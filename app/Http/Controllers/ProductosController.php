@@ -27,9 +27,14 @@ class ProductosController extends Controller
             'categoria' => 'required|in:pan,postre,galleta',
             'precio' => 'required|numeric',
             'descripcion' => 'required|string',
-            'imagen' => 'required|string',
+            'imagen' => 'required|imagen|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'disponibilidad' => 'required|boolean',
         ]);
+        if ($request->hasFile('imagen')) {
+            $imageName = time().'.'.$request->imagen->extension();  
+            $request->imagen->move(public_path('images'), $imageName);
+            $request->merge(['imagen' => 'images/' . $imageName]);
+        }
 
         Producto::create($request->all());
        
@@ -53,7 +58,7 @@ class ProductosController extends Controller
             'categoria' => 'required|in:pan,postre,galleta',
             'precio' => 'required|numeric',
             'descripcion' => 'required|string',
-            'imagen' => 'required|string',
+            'imagen' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'disponibilidad' => 'required|boolean',
         ]);
 

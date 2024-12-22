@@ -5,7 +5,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Cargo;
 use App\Models\User;
 
 
@@ -50,8 +49,8 @@ class LoginController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'tipo' => 'required|exists:cargos,id',
-            'nombre_tienda' => 'required_if:tipo,2|nullable|string|max:255',
-            'ruc' => 'required_if:tipo,2|nullable|string|max:20',
+            'nombre_tienda' => 'nullable|string|max:255',
+            'ruc' => 'nullable|string|max:255',
         ]);
         //hacemos el registro
 

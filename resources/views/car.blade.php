@@ -23,7 +23,7 @@
             <div class="d-flex align-items-center">
                 <div class="user-info me-3">
                     <i class="fas fa-user me-2"></i>
-                    <span>Juan Pérez</span>
+                    <span>{{ Auth::user()->nombre }}</span>
                 </div>
             </div>
         </div>
@@ -37,71 +37,49 @@
             <div class="col-lg-8">
                 <!-- Cart Items -->
                 <div class="cart-items">
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col-md-2">
-                                    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff" class="img-fluid rounded" alt="Pan">
-                                </div>
-                                <div class="col-md-4">
-                                    <h5 class="card-title">Pan de Masa Madre</h5>
-                                    <p class="text-muted">Artesanal</p>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="quantity-control">
-                                        <button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity(1, -1)">-</button>
-                                        <span class="mx-2">2</span>
-                                        <button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity(1, 1)">+</button>
+                    @foreach($carritos as $carrito)
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-md-2">
+                                        <img src="{{ asset($carrito->producto->imagen) }}" class="img-fluid rounded" alt="{{ $carrito->producto->nombre }}">
                                     </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <span class="price">€5.99</span>
-                                </div>
-                                <div class="col-md-1">
-                                    <button class="btn btn-link text-danger" onclick="removeItem(1)">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
+                                    <div class="col-md-4">
+                                        <h5 class="card-title">{{ $carrito->producto->nombre }}</h5>
+                                        <p class="text-muted">{{ $carrito->producto->descripcion }}</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="text-muted">Cantidad: {{ $carrito->cantidad }}</p>
+                                    </div>
+                                    <div class="col-md-3 text-end">
+                                        <p class="text-muted">€{{ number_format($carrito->precio_total, 2) }}</p>
+                                        <form action="{{ route('carritos.destroy', $carrito) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
 
-            <!-- Order Summary -->
+            <!-- Cart Summary -->
             <div class="col-lg-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title mb-4">Resumen del Pedido</h5>
-                        <div class="d-flex justify-content-between mb-3">
-                            <span>Subtotal</span>
-                            <span>€11.98</span>
-                        </div>
-                        <div class="d-flex justify-content-between mb-3">
-                            <span>Envío</span>
-                            <span>€3.00</span>
-                        </div>
-                        <hr>
-                        <div class="d-flex justify-content-between mb-4">
-                            <strong>Total</strong>
-                            <strong>€14.98</strong>
-                        </div>
-                        <button class="btn btn-primary w-100 mb-3">
-                            Proceder al Pago
-                            <i class="fas fa-arrow-right ms-2"></i>
-                        </button>
-                        <a href="products.html" class="btn btn-outline-secondary w-100">
-                            <i class="fas fa-arrow-left me-2"></i>
-                            Seguir Comprando
-                        </a>
+                        <h5 class="card-title">Resumen del Pedido</h5>
+                        <p class="card-text">Total: €{{ number_format($carritos->sum('precio_total'), 2) }}</p>
+                        <a href="{{ route('checkout') }}" class="btn btn-primary">Proceder al Pago</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap Bundle with Popper -->
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/cart.js"></script>
 </body>
 </html>
